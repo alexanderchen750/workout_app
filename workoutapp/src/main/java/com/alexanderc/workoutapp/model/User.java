@@ -1,11 +1,14 @@
 package com.alexanderc.workoutapp.model;
 
-import lombok.Data;
+import com.alexanderc.workoutapp.entity.WorkoutEntity;
 
-@Data
+
+import java.util.List;
+
 public class User {
-    private Long user_id;
+    private Long id;
     private String email;
     private String password;
     private String name;
+    private List<WorkoutEntity> workouts;
 }
