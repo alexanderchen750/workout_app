@@ -3,6 +3,7 @@ package com.alexanderc.workoutapp.service;
 import com.alexanderc.workoutapp.entity.UserEntity;
 import com.alexanderc.workoutapp.entity.WorkoutEntity;
 import com.alexanderc.workoutapp.model.ActivityResp;
+import com.alexanderc.workoutapp.model.DeleteResp;
 import com.alexanderc.workoutapp.model.Workout;
 import com.alexanderc.workoutapp.repository.UserRepository;
 import com.alexanderc.workoutapp.repository.WorkoutRepository;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -58,5 +60,19 @@ public class WorkoutServiceImpl implements WorkoutService {
                 .stream()
                 .map(WorkoutEntity::getId)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public DeleteResp deleteWorkout(Long workoutId) {
+        DeleteResp deleteResp = new DeleteResp();
+        Optional<WorkoutEntity> optionalWorkout = workoutRepository.findById(workoutId);
+        if (optionalWorkout.isPresent()) {
+            workoutRepository.deleteById(workoutId);
+            deleteResp.setDeleted(true);
+            deleteResp.setId(workoutId);
+            return deleteResp;
+        }
+        deleteResp.setDeleted(false);
+        return deleteResp;
     }
 }

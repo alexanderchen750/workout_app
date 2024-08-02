@@ -6,6 +6,7 @@ import com.alexanderc.workoutapp.entity.UserEntity;
 import com.alexanderc.workoutapp.entity.WorkoutEntity;
 import com.alexanderc.workoutapp.model.ActivityReq;
 import com.alexanderc.workoutapp.model.ActivityResp;
+import com.alexanderc.workoutapp.model.DeleteResp;
 import com.alexanderc.workoutapp.model.SetResp;
 import com.alexanderc.workoutapp.repository.ActivityRepository;
 import com.alexanderc.workoutapp.repository.WorkoutRepository;
@@ -89,5 +90,19 @@ public class ActivityServiceImpl implements ActivityService{
 
         activityResp.setSets(setRespList);
         return activityResp;
+    }
+
+    public DeleteResp deleteActivity(Long activityId) {
+        DeleteResp deleteResp = new DeleteResp();
+        Optional<ActivityEntity> activityEntity = activityRepository.findById(activityId);
+        if(activityEntity.isPresent()){
+            activityRepository.deleteById(activityId);
+            deleteResp.setId(activityId);
+            deleteResp.setDeleted(true);
+            return deleteResp;
+        }
+        deleteResp.setDeleted(false);
+        return deleteResp;
+
     }
 }
