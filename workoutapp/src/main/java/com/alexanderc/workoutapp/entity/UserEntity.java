@@ -15,7 +15,11 @@ public class UserEntity {
     private String email;
     private String password;
     private String name;
+
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private List<WorkoutEntity> workouts;
+
+
 
 }

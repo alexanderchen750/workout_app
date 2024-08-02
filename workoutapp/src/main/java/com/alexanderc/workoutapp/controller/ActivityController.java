@@ -1,22 +1,27 @@
 package com.alexanderc.workoutapp.controller;
 
 import com.alexanderc.workoutapp.model.Activity;
+import com.alexanderc.workoutapp.model.ActivityReq;
+import com.alexanderc.workoutapp.model.ActivityResp;
 import com.alexanderc.workoutapp.service.ActivityService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
-@RequestMapping("/activity")
+@RequestMapping("api/v1/users/{userId}/workouts/{workoutId}")
 public class ActivityController {
     public final ActivityService activityService;
     public ActivityController(ActivityService activityService) {
         this.activityService = activityService;
     }
-    /*
-    @PostMapping("/create")
-    public Activity createActivity(@RequestBody Activity activity) {
-        return activityService.createActivity(activity);
-    }*/
+
+    @PostMapping("/activity")
+    public ActivityResp createActivity(@PathVariable Long userId, @PathVariable Long workoutId, @RequestBody ActivityReq activity) {
+        return activityService.createActivity(userId, workoutId, activity);
+    }
+    @GetMapping("/activity")
+    public List<ActivityResp> getActivity(@PathVariable Long userId, @PathVariable Long workoutId) {
+        return activityService.getActivities(workoutId);
+    }
 }

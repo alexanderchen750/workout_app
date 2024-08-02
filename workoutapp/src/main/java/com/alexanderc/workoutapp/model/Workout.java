@@ -6,11 +6,10 @@ import java.sql.Date;
 import java.time.LocalDateTime;
 import java.util.List;
 
-
+@Data
 public class Workout {
     private Long id;
     private Date workoutDate;
     private LocalDateTime createdAt;
-    private UserEntity user;
-    private List<ActivityEntity> activies;
+    private List<Activity> activities;
 }

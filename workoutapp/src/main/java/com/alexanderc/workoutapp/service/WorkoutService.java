@@ -1,6 +1,5 @@
 package com.alexanderc.workoutapp.service;
 
-import com.alexanderc.workoutapp.model.Workout;
 
 import java.util.List;
 

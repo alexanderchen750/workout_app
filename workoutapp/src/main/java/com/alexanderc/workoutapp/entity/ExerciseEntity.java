@@ -14,4 +14,8 @@ public class ExerciseEntity {
     private Long id;
     private String name;
 
+    @ManyToOne
+    @JoinColumn(name = "created_by", nullable = true)
+    private UserEntity createdBy; // Can be null for default exercises
+
 }

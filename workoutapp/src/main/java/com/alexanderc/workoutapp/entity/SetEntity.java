@@ -12,7 +12,7 @@ public class SetEntity{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private int reps;
-    private int sets;
+    private int weight;
 
     @ManyToOne()
     @JoinColumn(name = "activity_id")

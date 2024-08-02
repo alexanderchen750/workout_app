@@ -4,6 +4,7 @@ import com.alexanderc.workoutapp.entity.UserEntity;
 import com.alexanderc.workoutapp.model.User;
 import com.alexanderc.workoutapp.repository.UserRepository;
 import com.fasterxml.jackson.databind.util.BeanUtil;
+import com.sun.tools.jconsole.JConsoleContext;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -17,10 +18,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User createUser(User user) {
+    public Long createUser(User user) {
         UserEntity userEntity = new UserEntity();
         BeanUtils.copyProperties(user, userEntity);
         userRepository.save(userEntity);
-        return user;
+        return userEntity.getId();
     }
 }
