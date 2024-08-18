@@ -1,0 +1,25 @@
+.activity-text{
+    text-align: left;
+    margin: 0px;
+}
+
+.activity-tile{
+    padding-left: 30px;
+}
+
+.activity-group{
+    display:flex;
+    flex:row;
+    justify-content: space-between;
+}
+
+.sets-container {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out; /* Apply ease-in effect */
+}
+
+.sets-container.show {
+    max-height: 500px; /* A large enough value to accommodate the content */
+}
+

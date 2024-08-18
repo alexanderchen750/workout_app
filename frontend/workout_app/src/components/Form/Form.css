@@ -1,0 +1,113 @@
+
+
+.activity-input {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.set-input {
+    display: flex;
+    gap: 10px;
+    margin-top: 0px;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+
+
+.add-delete-button {
+    background-color: #f9f9f9;
+    border: 1px #cccccc solid ;
+    color: black;
+
+    border-radius: 4px;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    width: 20px;
+}
+
+.add-delete-button:hover {
+    background-color: #bcbcbc;
+}
+
+.create-workout-form{
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    padding: 10px;
+    border: solid 1px #cccccc;
+}
+
+/* General input styles */
+input[type="text"],
+input[type="number"] {
+    width: 100%; /* Full width of the parent container */
+    padding: 10px; /* Padding inside the input box */
+    margin: 5px 0; /* Margin between input boxes */
+    border: 1px solid #ccc; /* Light gray border */
+    border-radius: 4px; /* Rounded corners */
+    font-size: 16px; /* Font size */
+    box-sizing: border-box; /* Ensures padding and border are included in the element's width and height */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition on focus */
+}
+
+/* Change border color and add shadow on focus */
+input[type="text"]:focus,
+input[type="number"]:focus {
+    border-color: #52796F; /* Color on focus */
+    box-shadow: 0 0 8px rgba(82, 121, 111, 0.5); /* Shadow effect on focus */
+    outline: none; /* Remove default outline */
+}
+
+/* Styling the container holding the inputs */
+.set-input {
+    display: flex; /* Flexbox to align input fields horizontally */
+    gap: 10px; /* Space between the input fields */
+}
+
+/* Styling individual input fields when grouped */
+.set-input input {
+    flex: 1; /* Ma  kes each input take equal space within the flex container */
+}
+
+/* Styling the container of the entire activity */
+.activity-container {
+    background-color: #F4F4F9; /* Light background color */
+    padding: 20px; /* Padding inside the activity container */
+    margin-bottom: 20px; /* Space below each activity */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for a 3D effect */
+}
+
+.activity-section{
+    margin-bottom: 20px;
+}
+
+/* Styling for the placeholder text */
+input::placeholder {
+    color: #999; /* Lighter color for placeholder text */
+    opacity: 1; /* Ensures full visibility */
+}
+
+/*Just for text in title row, like "Set"*/
+.form-title-row-text{
+    text-align: left;
+    font-weight: bold;
+    display: block;
+}
+/*For entire title row*/
+.form-title-row{ 
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.form-header{
+    text-align: left;
+    margin: 0px;
+    margin-bottom: 10px;
+}

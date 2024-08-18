@@ -1,0 +1,23 @@
+.page-container {
+    display: flex;           /* Enables flexbox */
+    flex-direction  : column;
+    justify-content: center; /* Centers the container horizontally */
+    align-items: center;     /* Centers the container vertically */
+    padding-top: 70px;
+}
+.logo-container img{
+    width: 80px;
+}
+/*
+.toggle-text-container {
+
+}*/
+.toggle-text{
+    color: #1eaef6;
+    transition: color 0.3s ease;
+    font-weight: bold;
+}
+.toggle-text:hover {
+    color: #1c98d6; /* Darker blue on hover */
+    cursor: pointer; 
+}

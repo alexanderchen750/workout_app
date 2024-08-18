@@ -1,0 +1,48 @@
+.workout-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-bottom:10px;
+    padding-left: 30px;
+    margin: 0px;
+}
+
+
+.workout-text{
+    text-align: left;
+}
+
+.workout-tile{
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+}
+.activity-row{
+    display:flex;
+    flex: row;
+    border-top: 1px solid #cccccc;
+    padding-top:5px;
+    padding-bottom: 5px;
+    cursor: pointer;
+}
+
+.edit-button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    margin-left:45px;
+}
+
+.edit-icon {
+    width: 24px; /* Set your desired width */
+    height: 24px; /* Set your desired height */
+}
+
+.edit-button:hover .edit-icon {
+    opacity: 0.8; /* Optional: Add a hover effect */
+}
+
+.activities-tile{
+    border-bottom: 1px solid #cccccc;
+}

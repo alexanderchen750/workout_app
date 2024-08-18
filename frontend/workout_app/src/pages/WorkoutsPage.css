@@ -1,0 +1,70 @@
+/*
+#eeeeee	(238,238,238)
+#dddddd	(221,221,221)
+#cccccc	(204,204,204)
+#bbbbbb	(187,187,187)
+#9a9a9a	(154,154,154)
+
+*/
+body {
+    background-color: #fefeff; /* Replace with your desired color */
+    margin: 0;                 /* Remove default margin */
+    padding: 0;                /* Remove default padding */
+    min-height: 100vh;         /* Ensure body takes at least full viewport height */
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    background-color: #fefeff;
+    margin-top: 0;
+    padding: 5px;
+    border-style: solid;
+    border: 0px;
+    border-bottom: 1px solid #cccccc;
+}
+
+
+
+.workout-item {
+    background-color: #f9f9f9; 
+    border-color: #cccccc;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 8px;
+    flex: 1; /* Adjusts the flex item to take up equal space */
+    width: 80%;  
+    margin-left: 5%;         
+    margin-right: 5%;
+    max-width: 800px; 
+    min-width: 300px;
+}
+
+
+.workout-container {
+    flex: 2;    
+    width: 10%;
+    max-width: 900px;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column; /* or 'column' to stack vertically */
+    gap: 20px; /* Adds space between the Workout components */
+    /* Allows wrapping to the next line if there's not enough space */
+
+}
+
+.body-container{
+    display: flex;
+     /* Full viewport height */
+    padding-left: 1vw;
+    padding-right:1vw;
+}
+
+
+.workout-form{
+    flex: 1; /* Takes up 1/3 of the space */
+    padding: 20px;
+    max-width: 300px;
+    min-width: 200px;
+
+}
