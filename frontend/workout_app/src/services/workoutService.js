@@ -89,14 +89,12 @@ export const addActivity = async (workoutId, activity) => {
 export const removeWorkout = async (workoutId) => {
     try{
         const token = localStorage.getItem('jwtToken');
-        console.log(token)
         const config = {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
         };
         const response = await axios.delete(endpoints.deleteWorkout(workoutId),config);
-        console.log(response)
         return true;
     } catch (error){
         handleError(error);
@@ -105,10 +103,7 @@ export const removeWorkout = async (workoutId) => {
 }
 export const removeActivity = async (workoutId, activityId) => {
     try{
-        console.log("rm workoutID", workoutId)
-        console.log("rm activityID", activityId)
         const token = localStorage.getItem('jwtToken');
-        console.log(token)
         const config = {
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -117,6 +112,24 @@ export const removeActivity = async (workoutId, activityId) => {
         const response = await axios.delete(endpoints.deleteActivity(workoutId, activityId),config);
         console.log(response)
         return true;
+    } catch (error){
+        handleError(error);
+        throw error;
+    }
+}
+
+
+/* Search DropDown */
+export const findExercise = async (searchTerm) =>{
+    try{
+        const token = localStorage.getItem('jwtToken');
+        const config = {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        };
+        const response = await axios.get(endpoints.searchExercise(searchTerm),config);
+        return response.data
     } catch (error){
         handleError(error);
         throw error;

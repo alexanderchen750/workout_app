@@ -1,11 +1,14 @@
 .activity-text{
     text-align: left;
     margin: 0px;
+    padding-left: 30px;
 }
 
 .activity-tile{
-    padding-left: 30px;
+    width: 100%;
 }
+
+
 
 .activity-group{
     display:flex;
@@ -16,10 +19,72 @@
 .sets-container {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.3s ease-in-out; /* Apply ease-in effect */
+    transition: max-height 0.3s ease-in, padding 0.3s ease-in; /* Include padding in the transition */
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: 10px;
+    padding-right:10px;
+    font-size: 16px;
 }
 
 .sets-container.show {
-    max-height: 500px; /* A large enough value to accommodate the content */
+    max-height: 500px; /* Large enough value to accommodate the content */
+    padding-top: 10px; /* Or whatever padding you want */
+    padding-bottom: 10px; /* Or whatever padding you want */
 }
 
+
+
+.delete-activity-button{
+    margin-right: 10px;
+    border-radius: 5px;
+    border: 1px black solid;
+    color: #fefeff;
+    background-color: #fefeff;
+    
+}
+
+.delete-activity-button:hover{
+    margin-right: 10px;
+    background-color: rgb(168, 9, 9);
+    color: white;
+    cursor: pointer;
+    
+}
+
+.sets-header {
+    display: flex;
+    font-weight: bold;
+    padding-bottom: 8px;
+    position: relative; /* To position the pseudo-element */
+    border-bottom: 1.1px solid #cccccc;
+}
+
+
+
+.sets-header > div {
+    flex: 1;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.sets-header > div:first-child {
+    text-align: left;  /* Align "Set #" to the left */
+    padding-left: 30px;
+}
+
+.set-row {
+    display: flex;
+    padding: 8px 0;
+}
+
+.set-row > div {
+    flex: 1;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.set-row > div:first-child {
+    text-align: left;  /* Align "Set #" to the left */
+    padding-left: 30px;
+}

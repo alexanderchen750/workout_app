@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState , useContext} from 'react';
 import "./Form.css"
+import SearchDropdown from '../Dropdown/SearchDropdown';
+import { WorkoutContext } from '../../context/WorkoutContext';
 
 const CreateWorkoutForm = ({ onCreate }) => {
+    const {unitImperial} = useContext(WorkoutContext)
     const [workoutDate, setWorkoutDate] = useState('');
     const [activities, setActivities] = useState([{ name: '', sets: [{ weight: 0, reps: 0 }] }]);
 
@@ -79,7 +82,7 @@ const CreateWorkoutForm = ({ onCreate }) => {
     return (
         <form onSubmit={handleSubmit} className="create-workout-form">
             <div>
-                <h3 className='form-header' >Create Workout</h3>
+                <h2 className='form-header' >Create Workout</h2>
             </div>
             <div className="form-group">
                 <label htmlFor="workout-date" className='form-title-row-text'>Date</label>
@@ -94,25 +97,23 @@ const CreateWorkoutForm = ({ onCreate }) => {
             <div className="form-group">
                 {activities.map((activity, index) => (
                     <div key={index} className="activity-section">
-                        <div className='form-title-row'>
+                        <div className='form-title-row' style={{ marginTop: "5px" }}>
                             <label className="form-title-row-text">Exercise</label>
                             <button
                                 type="button"
                                 onClick={() => handleDeleteActivity(index)}
-                                className="add-delete-button"
+                                className="delete-exercise-button"
                             >
-                                -
+                                Remove Exercise
                             </button>
                         </div>
                         
                         <div className="activity-input">
-                            <input
-                                type="text"
+
+                            <SearchDropdown
                                 value={activity.name}
-                                onChange={(e) =>
-                                    handleActivityChange(index, 'name', e.target.value)
-                                }
-                                required
+                                onChange={(value) => handleActivityChange(index, 'name', value)}
+                                onSelect={(value) => handleActivityChange(index, 'name', value)}
                             />
                         </div>
                         <div>
@@ -121,16 +122,16 @@ const CreateWorkoutForm = ({ onCreate }) => {
                                 <button
                                     type="button"
                                     onClick={() => handleAddSet(index)}
-                                    className="add-delete-button"
+                                    className="add-set-button"
                                 >
-                                    +
+                                    Add Set
                                 </button>
                             </div>
                             {activity.sets.map((set, setIndex) => (
                                 <div key={setIndex} className="set-input">
                                     <input
                                         type="number"
-                                        placeholder="Weight"
+                                        placeholder={"Weight " + (unitImperial ? "(lbs)" : "(kgs)")}
                                         value={set.weight === 0 ? '' : set.weight}
                                         onChange={(e) =>
                                             handleSetChange(index, setIndex, 'weight', e.target.value)
@@ -160,12 +161,12 @@ const CreateWorkoutForm = ({ onCreate }) => {
                         </div>
                     </div>
                 ))}
-                <button type="button" onClick={handleAddActivity}>
+                <button className="bottom-button" type="button" onClick={handleAddActivity}>
                     Add Activity
                 </button>
             </div>
 
-            <button type="submit" disabled={!canSubmit()}>Create Workout</button>
+            <button className="bottom-button" type="submit" disabled={!canSubmit()}>Create Workout</button>
         </form>
     );
 };

@@ -15,36 +15,50 @@ body {
 
 .header {
     display: flex;
-    justify-content: space-between;
+    padding-top: 10px;
+    align-items: center;
+    justify-content: right;
     background-color: #fefeff;
     margin-top: 0;
-    padding: 5px;
-    border-style: solid;
-    border: 0px;
-    border-bottom: 1px solid #cccccc;
+    padding-right: 10px;
+   
+}
+.workout-page-container{
+    padding-top: 0px;
+    width:10;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+}
+
+.page{
+    margin-top: 0px;
+    width: 100%;
+    height: 100%;
 }
 
 
-
 .workout-item {
-    background-color: #f9f9f9; 
+    background-color: #fafcfe; 
     border-color: #cccccc;
     border-style: solid;
     border-width: 1px;
     border-radius: 8px;
     flex: 1; /* Adjusts the flex item to take up equal space */
-    width: 80%;  
-    margin-left: 5%;         
+    width: 100%;         
     margin-right: 5%;
     max-width: 800px; 
-    min-width: 300px;
-}
+    min-width: 200px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08); /* Subtle, soft shadow */
+}   
 
 
 .workout-container {
     flex: 2;    
-    width: 10%;
-    max-width: 900px;
+    width: 100%;
+    max-width: 1000px;
+    min-width: 500px;
     margin-top: 20px;
     display: flex;
     flex-direction: column; /* or 'column' to stack vertically */
@@ -55,16 +69,81 @@ body {
 
 .body-container{
     display: flex;
+    flex-direction: column;
+    justify-items: center;
      /* Full viewport height */
-    padding-left: 1vw;
-    padding-right:1vw;
+    padding-left: 3vw;
+    padding-top: 3vh;
+    padding-right: 3vh;
 }
 
 
 .workout-form{
-    flex: 1; /* Takes up 1/3 of the space */
+    
     padding: 20px;
     max-width: 300px;
     min-width: 200px;
+}
 
+/* Button styling */
+.create-button {
+    padding: 10px 20px;
+    background-color: #1eaef6;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.create-button:hover {
+    background-color: #1c87c9;
+}
+.popup-overlay.show {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+    visibility: visible;
+  }
+
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Popup content */
+.popup-content {
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 100%;
+    max-height: 90%;
+    overflow-y: auto;
+    z-index: 1001;
+}
+
+
+/* Close button */
+.close-button {
+    padding: 5px 10px;
+    background-color: white;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    float: right;
+
+}
+
+.close-button:hover {
+    background-color: #c0392b;
+    color:white;
 }

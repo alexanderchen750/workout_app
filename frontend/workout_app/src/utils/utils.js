@@ -12,5 +12,7 @@ export const endpoints = {
     
     deleteWorkout: (workoutId) => `${API_BASE_URL}/workout/${workoutId}`,
     deleteActivity: (workoutId,activityId) => `${API_BASE_URL}/workout/${workoutId}/activity/${activityId}`,
-    deleteSet: (workoutId,activityId, setId) => `${API_BASE_URL}/workout/${workoutId}/activity/${activityId}/set/${setId}`
+    deleteSet: (workoutId,activityId, setId) => `${API_BASE_URL}/workout/${workoutId}/activity/${activityId}/set/${setId}`,
+
+    searchExercise: (search) => `${API_BASE_URL}/exercise/search?search=${search}`
 };

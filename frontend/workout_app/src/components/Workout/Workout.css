@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
     padding-bottom:10px;
     padding-left: 30px;
     margin: 0px;
@@ -10,11 +11,12 @@
 
 .workout-text{
     text-align: left;
+    margin: 0px;
 }
 
 .workout-tile{
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding-top: 10px;
+    padding-bottom: 13px;
 
 }
 .activity-row{
@@ -24,6 +26,10 @@
     padding-top:5px;
     padding-bottom: 5px;
     cursor: pointer;
+}
+.activity-row:hover{
+    background-color: #e1e6e9;   
+    cursor: default;
 }
 
 .edit-button {
@@ -45,4 +51,22 @@
 
 .activities-tile{
     border-bottom: 1px solid #cccccc;
+    
+}
+
+.delete-workout-button{
+    margin-right: 9px;
+    height: 25px;
+    width: 25px;
+    border-radius: 5px;
+    border: 1px black solid;
+    color: #fefeff;
+    background-color: #fefeff;
+}
+
+.delete-workout-button:hover{
+    background-color: rgb(168, 9, 9);
+    color: white;
+    cursor: pointer;
+    
 }

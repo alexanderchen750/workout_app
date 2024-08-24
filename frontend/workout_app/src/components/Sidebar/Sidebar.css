@@ -1,0 +1,76 @@
+.sidebar-logo-container img{
+    width: 50px;
+    margin-right: 5px;
+}
+.sidebar-container{
+    width: 320px;
+    min-width: 320px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #1eaef6;
+    align-items: center;
+    color: white;
+}
+
+.sidebar-header{
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+.bottom-container{
+    margin-bottom: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.unit-text p{
+    text-align: center;
+}
+
+.weather-button-container {
+    display: flex; /* Arrange buttons side by side */
+    border-radius: 12px; /* Apply rounded corners to the container */
+    overflow: hidden; /* Ensure buttons don't overflow the container's rounded corners */
+}
+
+.metric-button, .imperial-button {
+    flex: 1; /* Ensure buttons are the same width */
+    border: none; /* Remove default border */
+    padding: 10px 20px; /* Add some padding for a nice appearance */
+    cursor: pointer;
+    background-color: #f7f7f7; /* Example background color */
+    color: black; /* Example text color */
+    font-size: 18px;
+}
+
+.metric-button {
+    border-top-left-radius: 12px; /* Round top-left corner */
+    border-bottom-left-radius: 12px; /* Round bottom-left corner */
+}
+
+.imperial-button {
+    border-top-right-radius: 12px; /* Round top-right corner */
+    border-bottom-right-radius: 12px; /* Round bottom-right corner */
+}
+
+.metric-button:hover, .imperial-button:hover {
+    background-color: #dde0e1; /* Example hover effect */
+}
+
+
+.metric-button.active, .imperial-button.active {
+    background-color: rgb(202, 222, 226); /* Active button color */
+    color: black; /* Active text color */
+}
+
+.creator-text{
+    font-size: 12px;
+    text-align: center;
+    color: #313131;
+}

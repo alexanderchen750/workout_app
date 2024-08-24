@@ -1,26 +1,28 @@
 import React, { useEffect, useState, useContext } from "react";
-import { fetchWorkoutDetails, removeWorkout } from "../../services/workoutService";
+import { fetchWorkoutDetails, removeWorkout, removeActivity, findExercise } from "../../services/workoutService";
 import Activity from '../Activity/Activity';
 import './Workout.css'
 import checkBox from "../../assets/images/checkbox.png"
 import { WorkoutContext } from "../../context/WorkoutContext";
 
 const Workout = ({workoutId, workoutDate}) => {
-    const {deleteWorkout} = useContext(WorkoutContext);
+    const {deleteWorkout, deleteActivity} = useContext(WorkoutContext);
     const [workout, setWorkout] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [showSetsMap, setShowSetsMap] = useState({});
+    const [dummyState, setDummyState] = useState(0);
 
     useEffect(()=>{
         const workoutDetails = async () => {
             try{
                 const data = await fetchWorkoutDetails(workoutId);
-
+                console.log("DATA", data)
                 if (Array.isArray(data)) {
                     if(data.length===0){
+                        console.log("DELETING ARRAY")
                         const del = await removeWorkout(workoutId);
-                        deleteWorkout();
+                        deleteWorkout(del.id);
                     }
                     else{
                         setWorkout(data);
@@ -39,7 +41,7 @@ const Workout = ({workoutId, workoutDate}) => {
             }
         };
         workoutDetails()
-    }, [workoutId])
+    }, [workoutId, dummyState])
 
     const handleActivityClick = (activityId) => {
         setShowSetsMap(prevShowSetsMap => ({
@@ -54,6 +56,18 @@ const Workout = ({workoutId, workoutDate}) => {
             deleteWorkout(); // Update the context after the workout is deleted
         } catch (error) {
             console.error("Failed to delete workout:", error);
+        }
+    }
+
+    const handleDeleteActivity = async (e,activityId) => {
+        console.log("here")
+        try{
+            e.stopPropagation();
+            await removeActivity(workoutId, activityId);
+            setDummyState(prevState => prevState+1)
+            deleteActivity();
+        }catch(error){
+            console.log("Fail to Delete Activity");
         }
     }
 
@@ -82,7 +96,7 @@ const Workout = ({workoutId, workoutDate}) => {
         <div className="workout-tile">
             <div className="workout-header">
                 <h2 className="workout-text">Workout: {formatDate(workoutDate)}</h2>
-                <button onClick={handleDeleteClick}>X</button>
+                <button className="delete-workout-button" onClick={handleDeleteClick}>X</button>
             </div>
             <div className="activities-tile">
                 {workout.map(activity => (
@@ -90,7 +104,7 @@ const Workout = ({workoutId, workoutDate}) => {
                         {/* <button className="edit-button"><img src={checkBox} alt="check" className="edit-icon"/></button> -->*/}
                         <Activity
                         key={activity.id}
-                        workoutId ={workoutId}
+                        onDeleteClick={handleDeleteActivity}
                         activityId={activity.id}
                         activity={activity}
                         showSets={!!showSetsMap[activity.id]}  
