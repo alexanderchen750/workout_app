@@ -9,9 +9,11 @@ import com.alexanderc.workoutapp.model.ActivityResp;
 import com.alexanderc.workoutapp.model.DeleteResp;
 import com.alexanderc.workoutapp.model.SetResp;
 import com.alexanderc.workoutapp.repository.ActivityRepository;
+import com.alexanderc.workoutapp.repository.UserRepository;
 import com.alexanderc.workoutapp.repository.WorkoutRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -24,10 +26,12 @@ public class ActivityServiceImpl implements ActivityService{
 
     private final ActivityRepository activityRepository;
     private final WorkoutRepository workoutRepository;
+    private final UserRepository userRepository;
 
-    public ActivityServiceImpl(ActivityRepository activityRepository, WorkoutRepository workoutRepository){
+    public ActivityServiceImpl(UserRepository userRepository, ActivityRepository activityRepository, WorkoutRepository workoutRepository){
         this.activityRepository = activityRepository;
         this.workoutRepository = workoutRepository;
+        this.userRepository = userRepository;
     }
 
     @Autowired
@@ -37,13 +41,18 @@ public class ActivityServiceImpl implements ActivityService{
     private ExerciseService exerciseService;
 
     @Override
-    public ActivityResp createActivity(Long userId,Long workoutId,  ActivityReq activity) {
+    public ActivityResp createActivity(String email,Long workoutId,  ActivityReq activity) {
+
+        Optional<UserEntity> userEntityOptional = userRepository.findByEmail(email);
+        UserEntity userEntity = userEntityOptional
+                .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
+
         WorkoutEntity workoutEntity = workoutRepository.findById(workoutId)
                 .orElseThrow(() -> new RuntimeException("Workout not found"));
 
         // Get or create the exercise
-        ExerciseEntity exerciseEntity = exerciseService.createExercise(userId, activity.getExercise());
-
+        ExerciseEntity exerciseEntity = exerciseService.createExercise(userEntity.getId(), activity.getExercise());
+        System.out.print(exerciseEntity.getName());
         // Create and save the activity entity
         ActivityEntity activityEntity = new ActivityEntity();
         activityEntity.setWorkout(workoutEntity);

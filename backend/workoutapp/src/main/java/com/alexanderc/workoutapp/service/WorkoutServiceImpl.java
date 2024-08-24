@@ -2,13 +2,13 @@ package com.alexanderc.workoutapp.service;
 
 import com.alexanderc.workoutapp.entity.UserEntity;
 import com.alexanderc.workoutapp.entity.WorkoutEntity;
-import com.alexanderc.workoutapp.model.ActivityResp;
-import com.alexanderc.workoutapp.model.DeleteResp;
-import com.alexanderc.workoutapp.model.Workout;
+import com.alexanderc.workoutapp.model.*;
 import com.alexanderc.workoutapp.repository.UserRepository;
 import com.alexanderc.workoutapp.repository.WorkoutRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 public class WorkoutServiceImpl implements WorkoutService {
     private final UserRepository userRepository;
     private final ActivityServiceImpl activityServiceImpl;
-    private WorkoutRepository workoutRepository;
+    private final WorkoutRepository workoutRepository;
 
     public WorkoutServiceImpl(WorkoutRepository workoutRepository, UserRepository userRepository, ActivityServiceImpl activityServiceImpl) {
         this.workoutRepository = workoutRepository;
@@ -32,47 +32,69 @@ public class WorkoutServiceImpl implements WorkoutService {
     private ActivityService activityService;
 
     @Override
-    public Long createWorkout(Long userId) {
+    public Long createWorkout(String email, WorkoutReq workoutReq) {
+        Optional<UserEntity> userEntityOptional = userRepository.findByEmail(email);
 
-        UserEntity userEntity = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+        // Throw an exception if the user is not found
+        UserEntity userEntity = userEntityOptional
+                .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
 
         WorkoutEntity workoutEntity = new WorkoutEntity();
         workoutEntity.setUser(userEntity);
+        if(workoutReq!=null){
+            if(workoutReq.getDate()!=null){
+                workoutEntity.setWorkoutDate(java.sql.Date.valueOf(workoutReq.getDate()));
+            }
+        }
         workoutEntity = workoutRepository.save(workoutEntity);
         return workoutEntity.getId();
-        /*
-        WorkoutEntity finalWorkoutEntity = workoutEntity;
-        // Create activities
-        if (workout.getActivities() != null) {
-            workout.getActivities().forEach(activity ->
-                    activityService.createActivity(finalWorkoutEntity.getId(), userId, activity));
-        }
-        Workout workoutDTO = new Workout();
-        BeanUtils.copyProperties(workoutEntity, workoutDTO);
-        return workoutDTO;
-         */
     }
 
     @Override
-    public List<Long> getWorkoutIdsByUserId(Long userId){
-        return workoutRepository.findByUserId(userId)
+    public List<WorkoutResp> getWorkoutIdsByUserId(String email) {
+        Optional<UserEntity> userEntityOptional = userRepository.findByEmail(email);
+
+        // Throw an exception if the user is not found
+        UserEntity userEntity = userEntityOptional
+                .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
+
+        return workoutRepository.findByUserId(userEntity.getId())
                 .stream()
-                .map(WorkoutEntity::getId)
+                .map(workoutEntity -> new WorkoutResp(
+                        workoutEntity.getId(),
+                        workoutEntity.getWorkoutDate().toString() // Assuming `getWorkoutDate` returns a LocalDate or Date object
+                ))
                 .collect(Collectors.toList());
     }
 
+
+
     @Override
-    public DeleteResp deleteWorkout(Long workoutId) {
+    public DeleteResp deleteWorkout(String email, Long workoutId) {
         DeleteResp deleteResp = new DeleteResp();
-        Optional<WorkoutEntity> optionalWorkout = workoutRepository.findById(workoutId);
-        if (optionalWorkout.isPresent()) {
-            workoutRepository.deleteById(workoutId);
-            deleteResp.setDeleted(true);
-            deleteResp.setId(workoutId);
-            return deleteResp;
+
+        // Find the user by email
+        Optional<UserEntity> optionalUser = userRepository.findByEmail(email);
+        if (optionalUser.isPresent()) {
+            UserEntity user = optionalUser.get();
+
+            // Find the workout by ID
+            Optional<WorkoutEntity> optionalWorkout = workoutRepository.findById(workoutId);
+            if (optionalWorkout.isPresent()) {
+                WorkoutEntity workout = optionalWorkout.get();
+
+                // Check if the workout belongs to the user
+                if (workout.getUser().equals(user)) {
+                    // Delete the workout if it belongs to the user
+                    workoutRepository.deleteById(workoutId);
+                    deleteResp.setDeleted(true);
+                    deleteResp.setId(workoutId);
+                    return deleteResp;
+                }
+            }
         }
         deleteResp.setDeleted(false);
         return deleteResp;
     }
+
 }

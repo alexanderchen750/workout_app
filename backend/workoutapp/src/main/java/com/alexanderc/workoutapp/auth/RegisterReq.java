@@ -1,2 +1,16 @@
-package com.alexanderc.workoutapp.auth;public class ReigsterReq {
+package com.alexanderc.workoutapp.auth;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class RegisterReq {
+    private String name;
+    private String email;
+    private String password;
 }

@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
-public class Workout {
+public class    Workout {
     private Long id;
     private Date workoutDate;
     private LocalDateTime createdAt;

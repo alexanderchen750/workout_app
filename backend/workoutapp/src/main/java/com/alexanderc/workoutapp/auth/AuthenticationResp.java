@@ -1,2 +1,16 @@
-package com.alexanderc.workoutapp.auth;public class AuthenticationResp {
+package com.alexanderc.workoutapp.auth;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class AuthenticationResp {
+
+    private String token;
+    private String name;
 }

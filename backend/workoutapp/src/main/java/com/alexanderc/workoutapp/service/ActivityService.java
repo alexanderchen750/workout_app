@@ -7,7 +7,7 @@ import com.alexanderc.workoutapp.model.DeleteResp;
 import java.util.List;
 
 public interface ActivityService {
-    ActivityResp createActivity( Long userId, Long workoutId, ActivityReq activity);
+    ActivityResp createActivity( String email, Long workoutId, ActivityReq activity);
     List<ActivityResp> getActivities(Long workoutId);
     DeleteResp deleteActivity(Long activityId);
 }

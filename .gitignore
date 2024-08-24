@@ -1,1 +1,4 @@
 secret.propeprties
+node_modules/
+
+.DS_Store

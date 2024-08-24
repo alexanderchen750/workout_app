@@ -8,7 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/user/{userId}/workout/{workoutId}/activity/{activityId}")
+@RequestMapping("/api/v1/workout/{workoutId}/activity/{activityId}")
 public class SetController {
 
     public final SetService setService;

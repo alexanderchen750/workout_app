@@ -69,6 +69,14 @@ public class SetServiceImpl implements SetService {
         DeleteResp deleteResp = new DeleteResp();
         if(setEntity.isPresent()){
             setRepository.deleteById(setId);
+            ActivityEntity activityEntity = setEntity.get().getActivity();
+            // Delete the set
+            setRepository.deleteById(setId);
+            // Check if the activity has no more sets
+            if (activityEntity.getSets().isEmpty()) {
+                // Delete the activity
+                activityRepository.delete(activityEntity);
+            }
             deleteResp.setDeleted(true);
             deleteResp.setId(setId);
             return deleteResp;
