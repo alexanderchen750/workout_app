@@ -20,7 +20,7 @@ public class SearchController {
     }
 
     @GetMapping("/exercise/search")
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = {"http://localhost:3000", "http://workout-app-frontend-1.s3-website-us-west-1.amazonaws.com"})
     public List<String> searchExerciseNames(@RequestParam String search) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return exerciseService.searchExerciseNames(authentication.getName(), search);

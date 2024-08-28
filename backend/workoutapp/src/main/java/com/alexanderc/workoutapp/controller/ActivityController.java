@@ -19,18 +19,18 @@ public class ActivityController {
         this.activityService = activityService;
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = {"http://localhost:3000", "http://workout-app-frontend-1.s3-website-us-west-1.amazonaws.com"})
     @PostMapping("/activity")
     public ActivityResp createActivity( @PathVariable Long workoutId, @RequestBody ActivityReq activity) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return activityService.createActivity(authentication.getName(), workoutId, activity);
     }
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = {"http://localhost:3000", "http://workout-app-frontend-1.s3-website-us-west-1.amazonaws.com"})
     @GetMapping("/activity")
     public List<ActivityResp> getAllActivities(@PathVariable Long workoutId) {
         return activityService.getActivities(workoutId);
     }
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = {"http://localhost:3000", "http://workout-app-frontend-1.s3-website-us-west-1.amazonaws.com"})
     @DeleteMapping("/activity/{activityId}")
     public DeleteResp deleteActivity(@PathVariable Long activityId) {
         return activityService.deleteActivity(activityId);

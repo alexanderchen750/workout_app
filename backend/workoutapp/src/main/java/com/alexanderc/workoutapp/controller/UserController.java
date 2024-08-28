@@ -26,7 +26,7 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(new IdResp(userId));
     }
     @GetMapping("/user/login-details")
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = {"http://localhost:3000", "http://workout-app-frontend-1.s3-website-us-west-1.amazonaws.com"})
     public ResponseEntity<NameResp> loginUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         NameResp nameResp = userService.getNameByEmail(authentication.getName());

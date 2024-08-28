@@ -2,18 +2,24 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 150px;
+    width: 300px;
 }
 
 .profile-item {
     margin: 0 5px;
+}
+.profile-name{
+    margin: 0 5px;
+    width: 100%;
+    text-align: right;
 }
 
 .avatar {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
+    min-width: 40px;
+    max-width: 40px;
     height: 40px;
     color: black;
     border-radius: 50%;

@@ -19,7 +19,8 @@ public class WorkoutController {
     public WorkoutController(WorkoutService workoutService) {
         this.workoutService = workoutService;
     }
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = {"http://localhost:3000", "http://workout-app-frontend-1.s3-website-us-west-1.amazonaws.com/"})
+
     @PostMapping("/workout")
     public ResponseEntity<IdResp> createWorkout(@RequestBody WorkoutReq workoutReq ){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -27,8 +28,8 @@ public class WorkoutController {
         // Return a ResponseEntity with status 201 Created and a body containing the userId
         return ResponseEntity.status(HttpStatus.CREATED).body(new IdResp(workoutId));
     }
-    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/workout")
+    @CrossOrigin(origins = {"http://localhost:3000", "http://workout-app-frontend-1.s3-website-us-west-1.amazonaws.com"})
     public ResponseEntity<List<WorkoutResp>> getWorkoutIdsByUserId() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         List<WorkoutResp> workoutIds = workoutService.getWorkoutIdsByUserId(authentication.getName());
@@ -36,7 +37,7 @@ public class WorkoutController {
     }
 
     @DeleteMapping("/workout/{workoutId}")
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = {"http://localhost:3000", "http://workout-app-frontend-1.s3-website-us-west-1.amazonaws.com/"})
     public DeleteResp deleteWorkout(@PathVariable Long workoutId) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         System.out.println(workoutId);

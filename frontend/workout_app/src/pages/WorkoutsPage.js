@@ -60,7 +60,6 @@ const WorkoutsPage = () => {
                                     <div className="popup-content" onClick={e => e.stopPropagation()}>
                                         <button className="close-button" onClick={closePopup}>X</button>
                                         <CreateWorkoutForm onCreate={onCreate}/>
-                                        
                                     </div>
                                 </div>
                             )}

@@ -15,12 +15,16 @@ public class SetController {
     public SetController(SetService setService) {
         this.setService = setService;
     }
+
     @PostMapping("/set")
+    @CrossOrigin(origins = {"http://localhost:3000", "http://workout-app-frontend-1.s3-website-us-west-1.amazonaws.com"})
     public SetResp createSet(@PathVariable Long userId, @PathVariable Long workoutId, @PathVariable Long activityId, @RequestBody SetReq setReq) {
         return setService.createProtectedSet(userId, workoutId, activityId, setReq);
     }
 
     @DeleteMapping("/set/{setId}")
+    @CrossOrigin(origins = {"http://localhost:3000", "http://workout-app-frontend-1.s3-website-us-west-1.amazonaws.com"})
+
     public DeleteResp deleteSet(@PathVariable Long setId){
         return setService.deleteSet(setId);
     }

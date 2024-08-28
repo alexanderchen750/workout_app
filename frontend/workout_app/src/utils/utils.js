@@ -1,4 +1,4 @@
-const API_BASE_URL = "http://localhost:8080/api/v1";
+const API_BASE_URL = "http://13.56.184.84:8080/api/v1";
 
 export const endpoints = {
     registerUser: `${API_BASE_URL}/auth/register`,
